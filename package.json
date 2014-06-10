@@ -1,0 +1,27 @@
+{
+  "name": "v-pusher",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmaklygin/v-pusher.git"
+  },
+  "description": "v-pusher ========",
+  "bugs": {
+    "url": "https://github.com/dmaklygin/v-pusher/issues"
+  },
+  "homepage": "https://github.com/dmaklygin/v-pusher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+	"dependencies": {
+		"faye": ">=1.0.1",
+		"request": "2.36.0"
+	},
+  "keywords": [
+    "push",
+    "nodejs"
+  ],
+  "author": "d.maklygin",
+  "license": "AS IS"
+}
