@@ -20,11 +20,6 @@ bayeux.on('subscribe', function(clientId, channel) {
 
 });
 
-//bayeux.on('publish', function(clientId, channel, data) {
-//	console.log('publish = ', clientId, channel, data);
-////	bayeux.getClient().publish('/channel', 'some data');
-//});
-
 require('./lib/request');
 
 bayeux.attach(server);
