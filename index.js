@@ -1,27 +1,15 @@
-var http = require('http'),
-	faye = require('faye');
+var
+	express = require('express'),
+	logger = require('morgan'),
+	http = require('http'),
+	app = express(),
+	server = http.createServer(app),
+	pusher = require('./app/controllers/pusher')(server);
 
-var server = http.createServer(),
-	bayeux = new faye.NodeAdapter({mount: '/faye'});
+//require('./lib/request');
 
+app.use(logger());
 
-bayeux.on('handshake', function(clientId) {
-	console.log('handshake new user = ' + clientId);
+server.listen(process.env.PORT || 8000);
 
-});
-
-bayeux.on('subscribe', function(clientId, channel) {
-	console.log('subscribe = ', clientId, channel);
-	switch (channel) {
-		case '/fullPrematch':
-			bayeux.getClient().publish('/fullPrematch', 'full prematch');
-			break;
-	}
-
-});
-
-require('./lib/request');
-
-bayeux.attach(server);
-server.listen(8000);
-console.log('server start');
+console.log('Server Start on port: ' + (process.env.PORT || 8000));
