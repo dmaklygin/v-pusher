@@ -14,10 +14,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-	"dependencies": {
-		"faye": ">=1.0.1",
-		"request": "2.36.0"
-	},
+  "dependencies": {
+    "faye": ">=1.0.1",
+    "request": "2.36.0",
+    "redis": "^0.10.3",
+    "hiredis": "^0.1.17",
+    "coffee-script": "^1.7.1",
+    "forever": "^0.11.1",
+    "express": "^4.4.4",
+    "morgan": "^1.1.1",
+    "qs": "^0.6.6"
+  },
   "keywords": [
     "push",
     "nodejs"
