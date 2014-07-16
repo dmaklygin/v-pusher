@@ -1,0 +1,29 @@
+{
+  "name": "test",
+  "main": "test.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dmaklygin/v-pusher",
+  "authors": [
+    "Dmitry Maklygin <d.maklygin@gmail.com>"
+  ],
+  "description": "tests for v-pusher",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "test",
+    "v-pusher"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.6.0",
+    "backbone": "~1.1.2"
+  }
+}
