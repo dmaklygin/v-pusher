@@ -3,6 +3,7 @@
  */
 var
 	request = require('request'),
+  extend = require('extend'),
 	qs = require('qs'),
 	_ = require('./utils'),
 	settings = require('../settings/settings')
@@ -17,10 +18,11 @@ var Manager = module.exports = function (options) {
 		'language': 'ru'
 	});
 
-	this.options = {
-		onSuccess: options.onSuccess,
-		onError: options.onError
-	};
+	this.options = extend({}, options);
+
+  this.type = options.command;
+
+  this.redis = options.redis;
 
 	this.version = null;
 };
@@ -34,19 +36,59 @@ Manager.prototype.onSuccess = function(response) {
 	var _this = this,
 			success = this.options.onSuccess;
 
-	_this.version = response.line_version;
+	_this.setVersion(response.line_version);
 
-	success && success(response.tournaments);
+  _this.save(response.tournaments, function(err, res) {
 
-	// load tournaments
-	setTimeout(function() {
-		_this.run();
-	}, 100);
+    success && success(response.tournaments);
+
+    // load tournaments
+    setTimeout(function() {
+      console.log('rerun');
+      _this.run();
+    }, 100);
+
+  });
+
 };
 
 Manager.prototype.onError = function(error) {
 	// @todo handle errors
 	console.log('Server Error: ', error);
+};
+
+Manager.prototype.save = function (tournaments, callback) {
+
+  if (!tournaments.length) {
+    return callback && callback(null);
+  }
+
+  var
+    _this = this,
+    key = this.type + '_' + this.getVersion();
+
+  this.redis.set(key, JSON.stringify(tournaments), function (err, res) {
+
+    if (err) {
+      _this.redis.print(err);
+    } else {
+
+      // update global tournament object
+      _this.options.tournaments.merge(tournaments);
+
+      _this.redis.publish(_this.type, _this.getVersion());
+    }
+
+    return callback && callback(err, res);
+  });
+};
+
+Manager.prototype.setVersion = function (version) {
+  this.version = version;
+};
+
+Manager.prototype.getVersion = function () {
+  return this.version;
 };
 
 Manager.prototype._request = function (params, callback, fail) {
@@ -81,7 +123,7 @@ Manager.prototype.loadTournaments = function (success, fail) {
 	});
 
 	this._request(params, function(response) {
-		// @todo something actions
+    // @todo something actions
 		success && success.call(_this, response);
 	}, function(error) {
 		fail && fail.call(_this, error);

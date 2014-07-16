@@ -4,9 +4,34 @@
 
 module.exports = function(server) {
 
-	var faye = require('faye');
+	var
+    faye = require('faye'),
+    redis = require("redis"),
+    redisClient = redis.createClient(),
+    pusher
+    ;
 
-	var pusher = new faye.NodeAdapter({ mount: '/faye' });
+  pusher = new faye.NodeAdapter({ mount: '/faye' });
+
+  redisClient.subscribe('line');
+  redisClient.subscribe('live');
+
+  redisClient.on('message', function(channel, version) {
+    var
+      tournaments;
+
+    server.redisClient.get(channel + '_' + version, function(err, data) {
+
+      tournaments = JSON.parse(data);
+
+      if (err) {
+        return;
+      }
+
+      pusher.getClient().publish('/' + channel, { tournaments: tournaments, version: version });
+      console.log('push to ' + channel);
+    });
+  });
 
 	pusher.on('handshake', function(clientId) {
 		console.log('handshake new user = ' + clientId);
@@ -17,7 +42,8 @@ module.exports = function(server) {
 
 		switch (channel) {
 			case '/fullPrematch':
-				pusher.getClient().publish('/fullPrematch', 'full prematch');
+        // @todo Вызывать у prematchTournaments toJSON
+				pusher.getClient().publish('/fullPrematch', server.prematchTournaments.data);
 				break;
 		}
 	});

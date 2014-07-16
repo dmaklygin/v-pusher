@@ -1,0 +1,18 @@
+{
+  "name": "v-pucher-test",
+  "version": "0.0.1",
+  "description": "test for v-pusher",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "tests"
+  ],
+  "author": "d.maklygin",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.4.4",
+    "jade": "^1.3.1"
+  }
+}
