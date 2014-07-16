@@ -60,6 +60,18 @@ Tournaments.prototype.merge = function(tournaments) {
   this.parse(tournaments);
 };
 
+Tournaments.prototype.toJSON = function() {
+  var
+    data = [],
+    tournament;
+  for (var i in this.data) {
+    tournament = extend({}, this.data[i]);
+    tournament.events = tournament.events.toJSON();
+    data.push(tournament);
+  }
+  return data;
+};
+
 exports.createTournaments = function () {
   return new Tournaments();
 };

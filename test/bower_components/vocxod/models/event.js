@@ -1,8 +1,8 @@
 Models.Event = Backbone.Model.extend({
 
 	initialize: function (event, options) {
-		this._prepare_data();
-		this._update_cse_length();
+//		this._prepare_data();
+//		this._update_cse_length();
 	},
 
 	_prepare_data: function () {
@@ -28,9 +28,6 @@ Models.Event = Backbone.Model.extend({
 		var
 			value, key,
 			new_event = this.attributes;
-		//		# Обновляем тело события
-//		for key, value of event.forEach
-
 
 		for (key in event) {
 			value = event[key];
@@ -61,27 +58,15 @@ Models.Event = Backbone.Model.extend({
 
 		if (event.cse) {
 			var old_cse = this.get('cse') || {}
-		}
+      for (key in event.cse) {
+        value = event.cse[key];
+        old_cse[key] = value;
+      }
+      new_event.cse = old_cse
+    }
 
-
-
+    this.set(new_event, { silent: true });
 
 	}
-
-
-
-
-
-	if event.cse?
-		old_cse = @get('cse') || {}
-		for key, value of event.cse
-old_cse[key] = value
-new_event.cse = old_cse
-
-@set(new_event, silent: true)
-
-@_prepare_data()
-@_update_cse_length()
-
 
 });

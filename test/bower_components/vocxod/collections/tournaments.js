@@ -3,11 +3,12 @@ Collections.Tournaments = Backbone.Collection.extend({
 
 	model: Models.Tournament,
 
+  initialize: function (options) {
+
+
+  },
+
 	parse: function (data) {
-
-		this.version = data.line_version;
-
-		data.tournaments = data.tournaments || [];
 
 		return data.tournaments;
 	}

@@ -11,6 +11,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 app.use('/libs',  express.static(__dirname + '/bower_components'));
+app.use('/static', express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
 	res.render('index');

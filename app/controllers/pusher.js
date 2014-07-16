@@ -42,9 +42,11 @@ module.exports = function(server) {
 
 		switch (channel) {
 			case '/fullPrematch':
-        // @todo Вызывать у prematchTournaments toJSON
-				pusher.getClient().publish('/fullPrematch', server.prematchTournaments.data);
+        pusher.getClient().publish('/fullPrematch', { tournaments: server.prematchTournaments.toJSON() });
 				break;
+      case '/fullLive':
+        pusher.getClient().publish('/fullLive', { tournaments: server.liveTournaments.toJSON() });
+        break;
 		}
 	});
 

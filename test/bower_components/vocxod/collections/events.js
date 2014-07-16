@@ -9,7 +9,7 @@ Collections.Events = Backbone.Collection.extend({
 		_this.search_index = [];
 
 		// Создаем индекс для поиска по линии
-		data.each(function(event) {
+		data.forEach(function(event) {
 			_this.search_index.push(event.home, event.away)
 		});
 	},
@@ -22,7 +22,7 @@ Collections.Events = Backbone.Collection.extend({
 		var _this = this;
 		// Обновляем события
 		events.forEach(function (event) {
-			var existEvent = @get(event.id);
+			var existEvent = _this.get(event.id);
 			if (existEvent) {
 				existEvent.merge(event);
 				_this.trigger('merge', event);

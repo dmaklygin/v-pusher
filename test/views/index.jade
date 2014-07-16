@@ -4,12 +4,16 @@ html
     script(src='http://localhost:8001/libs/backbone/backbone.js')
     script(src='http://localhost:8000/faye/client.js')
     script(type='text/javascript').
-      Faye.logger = function(message) {
-        console.log(message);
-      };
-      var faye = new Faye.Client('http://localhost:8000/faye');
-      faye.subscribe('/line');
-      faye.subscribe('/fullPrematch');
+      //Faye.logger = function(message) {
+      //        console.log(message);
+      //      };
+    script(src='http://localhost:8001/static/js/app.js')
+    script(src='http://localhost:8001/libs/vocxod/models/event.js')
+    script(src='http://localhost:8001/libs/vocxod/collections/events.js')
+    script(src='http://localhost:8001/libs/vocxod/models/tournament.js')
+    script(src='http://localhost:8001/libs/vocxod/collections/tournaments.js')
+    script(type='text/javascript').
+      window.App = new Application();
     title
       | Faye Client
   body

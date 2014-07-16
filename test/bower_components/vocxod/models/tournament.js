@@ -6,12 +6,12 @@ Models.Tournament = Backbone.Model.extend({
 		model.search_index = [ model.name ];
 		model.near_datetime = 0;
 
-		model.events.each(function (event) {
+		model.events.forEach(function (event) {
 			model.search_index.push(event.home, event.away)
 		});
 
 		var
-			existModel = resp.collection.get(model['id']);
+			existModel = this.collection.get(model['id']);
 		if (existModel) {
 			model.events = existModel.get('events').merge(model.events);
 		} else {

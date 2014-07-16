@@ -55,3 +55,11 @@ Events.prototype.set = function (event) {
 Events.prototype.merge = function (events) {
   this.parse(events);
 };
+
+Events.prototype.toJSON = function() {
+  var data = [];
+  for (var i in this.data) {
+    data.push(extend({}, this.data[i]));
+  }
+  return data;
+};
