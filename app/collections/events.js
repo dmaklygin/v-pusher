@@ -4,7 +4,7 @@
 
 var extend = require('extend');
 
-var Events = module.exports = function(events) {
+var Events = module.exports = function (events) {
 
   this.data = {};
 
@@ -56,7 +56,7 @@ Events.prototype.merge = function (events) {
   this.parse(events);
 };
 
-Events.prototype.toJSON = function() {
+Events.prototype.toJSON = function () {
   var data = [];
   for (var i in this.data) {
     data.push(extend({}, this.data[i]));

@@ -4,7 +4,7 @@
 var extend = require('extend');
 var Events = require('./events');
 
-var Tournaments = exports.Tournaments = function(tournaments) {
+var Tournaments = exports.Tournaments = function (tournaments) {
 
   this.data = {};
 
@@ -42,12 +42,11 @@ Tournaments.prototype.add = function (tournament) {
   this.data[tournament.id] = tournament;
 };
 
-
-Tournaments.prototype.parse = function(tournaments) {
+Tournaments.prototype.parse = function (tournaments) {
 
   var _this = this;
 
-  tournaments.forEach(function(tournament) {
+  tournaments.forEach(function (tournament) {
     if (_this.get(tournament.id)) {
       _this.set(tournament);
     } else {
@@ -56,11 +55,11 @@ Tournaments.prototype.parse = function(tournaments) {
   });
 };
 
-Tournaments.prototype.merge = function(tournaments) {
+Tournaments.prototype.merge = function (tournaments) {
   this.parse(tournaments);
 };
 
-Tournaments.prototype.toJSON = function() {
+Tournaments.prototype.toJSON = function () {
   var
     data = [],
     tournament;

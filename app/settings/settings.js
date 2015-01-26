@@ -1,8 +1,8 @@
 var
-	settings = {};
+  settings = {};
 
 settings.api = {
-	url: 'http://vocxod.com/api/index.php'
+  url: 'http://vocxod.com/api/index.php'
 };
 
 module.exports = settings;
